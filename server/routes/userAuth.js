@@ -13,7 +13,11 @@ router.post('/login', (req, res) => {
       data: result
     });
   }
-  res.status(401).json({ message: 'Bad credentials' });
+  return res.json({
+    code: -1,
+    message: '账号或密码错误'
+  });
+  // res.status(401).json({ message: 'Bad credentials' });
 });
 
 router.post('/logout', (req, res) => {
