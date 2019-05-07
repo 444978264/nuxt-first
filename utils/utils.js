@@ -1,3 +1,10 @@
+import { encode, decode } from '../assets/lib/base64';
+
+// base64
+export const base64 = () => {
+  return { encode, decode };
+};
+
 // 判断对象中是否用某个属性
 export const has = (target, key) => {
   return Reflect.has(target, key);
@@ -45,18 +52,18 @@ export const getUrlParams = key => {
 };
 
 // 通过字符串获取对象中的值
-// export const evalVal = store => {
-//   const generateFn = function(store) {
-//     return function(params, val) {
-//       return new Function(
-//         'store',
-//         'val',
-//         `return val?(store.${params}=val):store.${params};`
-//       )(store, val);
-//     };
-//   };
-//   return generateFn(store);
-// };
+export const evalVal = store => {
+  const generateFn = function(store) {
+    return function(params, val) {
+      return new Function(
+        'store',
+        'val',
+        `return val?(store.${params}=val):store.${params};`
+      )(store, val);
+    };
+  };
+  return generateFn(store);
+};
 
 /*
  * formats格式包括
@@ -130,11 +137,12 @@ export function toThousands(num, fixed = 2) {
 }
 
 export default {
+  base64,
   has,
   deleteProperty,
   urlSerialize,
   getUrlParams,
-  // evalVal,
+  evalVal,
   formatDate,
   typeIs,
   Type,
