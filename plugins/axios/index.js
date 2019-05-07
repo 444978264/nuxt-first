@@ -12,9 +12,7 @@ export default function(ctx, inject) {
   // 已登录之后
   if (store.state.token) {
     basic_auth = store.state.token;
-    console.log('登录后' + basic_auth);
   }
-  console.log(basic_auth);
   $axios.setToken(basic_auth, 'Basic');
   $axios.onRequest(config => {
     return config;
