@@ -1,22 +1,24 @@
-# aha-v
+# nuxt-study
 
 ## 目录结构
 ```
 ├── api
-│   ├── client
-│   └── server
 ├── assets
 │   ├── css
 │   ├── img
 │   └── lib
 ├── components
+│   ├── modules
+│   ├── v-auth
+│   ├── v-footer
 │   ├── v-header
-│   └── v-login
-├── dist
-│   └── _nuxt
+│   ├── v-login
+│   └── v-video
+├── config
+│   └── generator
 ├── layouts
 ├── middleware
-├── minixs
+├── mixins
 ├── pages
 │   ├── login
 │   └── user
@@ -24,13 +26,16 @@
 │   ├── antd-ui
 │   ├── axios
 │   ├── element-ui
+│   ├── eventBus
 │   └── util
 ├── server
+│   └── routes
 ├── static
 ├── store
+├── test
 └── utils
 ```
-> ahaschool video website
+> nuxt-study
 
 ## Build Setup
 
