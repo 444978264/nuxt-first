@@ -1,0 +1,14 @@
+{
+  "prettier.eslintIntegration": true,
+  "prettier.requireConfig": true,
+  "editor.tabSize": 2,
+  "editor.formatOnPaste": true,
+  "eslint.validate": [
+    "javascript",
+    {
+      "language": "vue",
+      "autoFix": true
+    }
+  ],
+  "eslint.autoFixOnSave": true
+}

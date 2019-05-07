@@ -1,0 +1,37 @@
+.g-flex {
+  display: flex;
+}
+
+.g-flex-item {
+  flex: 1;
+}
+
+.g-flex-column {
+  flex-direction: column;
+}
+
+.g-flex-right {
+  &:extend(.g-flex);
+  justify-content: flex-end;
+}
+
+.g-flex-left {
+  &:extend(.g-flex);
+  justify-content: flex-start;
+}
+
+.g-center {
+  &:extend(.g-flex);
+  justify-content: center;
+  align-items: center;
+}
+
+.g-vcenter {
+  &:extend(.g-flex);
+  align-items: center;
+}
+
+.g-flex-between {
+  &:extend(.g-flex);
+  justify-content: space-between;
+}
