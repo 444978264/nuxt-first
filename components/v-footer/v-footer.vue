@@ -1,6 +1,6 @@
 <template>
   <div class="v-footer g-center">
-    Copyright © 2019 ahaschool
+    Copyright © 2019 nuxt-study
   </div>
 </template>
 
