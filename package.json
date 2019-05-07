@@ -1,8 +1,8 @@
 {
-  "name": "aha-v",
+  "name": "nuxt-study",
   "version": "1.0.0",
-  "description": "ahaschool学习中心",
-  "author": "lorinzhang",
+  "description": "nuxt study",
+  "author": "yifang.chen",
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon server/index.js --watch server",
@@ -47,8 +47,6 @@
     "babel-jest": "^24.1.0",
     "babel-plugin-component": "^1.1.1",
     "babel-plugin-import": "^1.11.0",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-stage-0": "^6.24.1",
     "clean-webpack-plugin": "^2.0.1",
     "copy-webpack-plugin": "^5.0.2",
     "eslint": "^5.15.1",

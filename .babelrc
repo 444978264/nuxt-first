@@ -11,12 +11,6 @@
           }
         ]
       ]
-    },
-    "development": {
-      "presets": ["es2015", "babel-preset-stage-0"]
-    },
-    "production": {
-      "presets": ["es2015", "babel-preset-stage-0"]
     }
   }
 }
