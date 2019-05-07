@@ -1,7 +1,7 @@
 <template>
   <div class="logo">
     <nuxt-link to="/">
-      ahaschool
+      nuxt-study
     </nuxt-link>
   </div>
 </template>
