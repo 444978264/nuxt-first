@@ -22,6 +22,7 @@ module.exports = {
   plugins: [
     { src: '@/plugins/util/index', mode: 'client' },
     '@/plugins/element-ui/index',
+    { src: '@/plugins/eventBus/index', mode: 'client' },
     { src: '@/plugins/axios/interceptors.server' },
     { src: '@/plugins/axios/index', mode: 'client' },
     { src: '@/plugins/cookie', mode: 'client' }
