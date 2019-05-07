@@ -20,23 +20,25 @@ class EventBus {
   on({ channel, resolve: fn, scope }) {
     if (!Type.isFunction(fn)) return;
 
-    if (this.busCollection.has(channel)) {
-      const emitter = this.busCollection.get(channel);
+    const namespace = this.getNameSpace(scope);
+
+    this._hasChannel(channel, emitter => {
+      if (!emitter) {
+        const event = new EventEmitter(channel).on(fn);
+        return this.busCollection.set(channel, event);
+      }
       emitter.value && fn(emitter.value);
       emitter.on(fn);
-    } else {
-      const event = new EventEmitter(channel).on(fn);
-      this.busCollection.set(channel, event);
-    }
+    });
 
-    const namespace = this.getNameSpace(scope);
-    if (this.scopeChannel.has(namespace)) {
-      this.scopeChannel.get(namespace)[channel].push(fn);
-    } else if (namespace) {
-      this.scopeChannel.set(namespace, {
-        [channel]: [fn]
-      });
-    }
+    this._hasScope(namespace, emitter => {
+      if (!emitter) {
+        return this.scopeChannel.set(namespace, {
+          [channel]: [fn]
+        });
+      }
+      emitter[channel].push(fn);
+    });
 
     return this;
   }
@@ -53,22 +55,33 @@ class EventBus {
   // 注销
   off({ channel, resolve: fn, scope }) {
     const namespace = this.getNameSpace(scope);
-    if (namespace && this.scopeChannel.has(namespace)) {
-      Object.entries(this.scopeChannel.get(namespace)).forEach(
-        ([key, values]) => {
-          const emitter = this.busCollection.get(key);
-          while (values.length) {
-            emitter.off(values.pop());
-          }
-          // 注销 事件
-          if (!emitter.size()) this.busCollection.delete(key);
+
+    this._hasScope(namespace, emitter => {
+      if (!emitter && channel) {
+        return this.busCollection.get(channel).off(fn);
+      }
+      Object.entries(emitter).forEach(([key, values]) => {
+        const emitter = this.busCollection.get(key);
+        while (values.length) {
+          emitter.off(values.pop());
         }
-      );
+        // 注销 事件
+        if (!emitter.size()) this.busCollection.delete(key);
+      });
       this.scopeChannel.delete(namespace);
-    } else if (channel) {
-      this.busCollection.get(channel).off(fn);
-    }
+    });
+
     return this;
+  }
+
+  _hasScope(namespace, callback) {
+    const has = namespace && this.scopeChannel.has(namespace);
+    callback && callback(has && this.scopeChannel.get(namespace));
+  }
+
+  _hasChannel(channel, callback) {
+    const has = channel && this.busCollection.has(channel);
+    callback && callback(has && this.busCollection.get(channel));
   }
 }
 
