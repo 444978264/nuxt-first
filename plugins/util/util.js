@@ -1,9 +1,3 @@
-/*
- * @Description: 工具类
- * @LastEditors: Lorin
- * @Date: 2019-03-29 16:53:09
- * @LastEditTime: 2019-04-05 19:53:46
- */
 import { encode, decode } from '../../assets/lib/base64';
 const Util = {
   /**

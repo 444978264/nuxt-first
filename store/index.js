@@ -1,9 +1,3 @@
-/*
- * @Description: 用户状态
- * @LastEditors: Lorin
- * @Date: 2019-03-26 17:19:36
- * @LastEditTime: 2019-04-16 17:41:55
- */
 const cookieparser = process.server ? require('cookieparser') : undefined;
 
 // authToken 类型

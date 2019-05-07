@@ -1,9 +1,3 @@
-/*
- * @Author: lorinzhang
- * @Date: 2019-04-04 22:00:42
- * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2019-05-07 14:43:30
- */
 export default {
   /**
    * 登录
