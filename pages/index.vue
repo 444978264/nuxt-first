@@ -22,7 +22,6 @@
       <nuxt-link to="/user">
         点我去个人中心
       </nuxt-link>
-      <div class="links">ahaschool{{ count }}</div>
     </div>
   </section>
 </template>
@@ -31,7 +30,6 @@
 import Logo from '~/components/Logo.vue';
 
 export default {
-  middleware: 'redirect',
   components: {
     Logo,
     Test: () => import(/* webpackChunkName: "test" */ './test.vue')
@@ -49,10 +47,7 @@ export default {
   },
   async asyncData(app) {
     let { data } = await app.$axios.get('/api/users');
-    // let aa = await app.$http.getBanners();
-    // console.log(aa.data);
     return { users: data };
-    // return {};
   }
 };
 </script>

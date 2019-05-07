@@ -5,7 +5,7 @@ if (result.error) {
 module.exports = {
   apps: [
     {
-      name: 'aha',
+      name: 'demo',
       script: 'npm',
       args: 'run start',
       cwd: './',

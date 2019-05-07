@@ -2,7 +2,7 @@
  * @Author: lorinzhang
  * @Date: 2019-04-04 22:00:42
  * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2019-04-10 15:55:08
+ * @Last Modified time: 2019-05-07 14:36:30
  */
 export default {
   /**
@@ -12,7 +12,7 @@ export default {
    * @returns
    */
   login() {
-    return this.post('/proxy/v3/visitor/login', ...arguments);
+    return this.post('/api/v3/visitor/login', ...arguments);
   },
 
   /**
@@ -23,7 +23,7 @@ export default {
    * @returns
    */
   sendSMS() {
-    return this.post('/proxy/v3/visitor/captcha/get', ...arguments);
+    return this.post('/proxy/XXXXXXXXXXX', ...arguments);
   },
   /**
    * example
@@ -32,13 +32,5 @@ export default {
    */
   exampleApi() {
     return this.get('/proxy/v1/products/:id/applyusers', ...arguments);
-  },
-  /**
-   * @description: 获取用户信息
-   * @param  user_id
-   * @return:
-   */
-  getUserInfo() {
-    return this.get('/proxy/v3/users/info', ...arguments);
   }
 };

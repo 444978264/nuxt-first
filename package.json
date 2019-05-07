@@ -15,7 +15,7 @@
     "test": "jest",
     "prod": "pm2 start pm2.config.js --env production",
     "analyze": "nuxt build -a",
-    "reload": "pm2 reload aha --update-env",
+    "reload": "pm2 reload demo --update-env",
     "component": "node config/template.js dir=components",
     "page": "node config/template.js dir=pages"
   },
