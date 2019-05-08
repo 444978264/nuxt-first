@@ -10,7 +10,7 @@ const resolve = filePath => {
   return path.resolve(__dirname, filePath);
 };
 
-const buildDir = resolve('../../aha-v-dist');
+const buildDir = resolve('../../nuxt-dist');
 const rootDir = resolve('../');
 
 const copyPath = [
