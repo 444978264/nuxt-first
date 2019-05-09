@@ -29,11 +29,15 @@ module.exports = {
   ],
   modules: [
     // ['@nuxtjs/dotenv', { systemvars: !isDev }],
-    '@nuxtjs/proxy',
+    // '@nuxtjs/proxy',
     '@nuxtjs/axios',
     '@nuxtjs/style-resources',
     '@nuxtjs/component-cache'
   ],
+  axios: {
+    proxy: true,
+    credentials: false
+  },
   serverMiddleware: ['~server/routes'],
   styleResources: {
     less: [resolve('../assets/css/theme.less')]

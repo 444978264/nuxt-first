@@ -4,8 +4,8 @@ module.exports = {
   proxy,
   server,
   axios: {
-    credentials: false,
-    baseURL: `http://${server.host}:${server.port}`
+    baseURL: `http://${server.host}:${server.port}`,
+    debug: true
   },
   build: {
     devtools: true,
