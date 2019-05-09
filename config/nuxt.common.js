@@ -20,7 +20,7 @@ module.exports = {
   loading: { color: '#fff' },
   css: ['~assets/css/normalize.css', '~assets/css/base.less'],
   plugins: [
-    { src: '@/plugins/util/index', mode: 'client' },
+    { src: '@/plugins/utils/index', mode: 'client' },
     '@/plugins/element-ui/index',
     { src: '@/plugins/eventBus/index', mode: 'client' },
     { src: '@/plugins/axios/interceptors.server' },
