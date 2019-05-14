@@ -61,8 +61,7 @@ console.log(CONFIG, 'CONFIG');
 module.exports = {
   buildDir: `${buildDir}/build`,
   axios: {
-    baseURL: `http://${CONFIG.host}:${CONFIG.port}`,
-    https: true
+    baseURL: `http://${CONFIG.host}:${CONFIG.port}`
   },
   proxy: {
     '/proxy': {
