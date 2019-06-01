@@ -1,7 +1,11 @@
 const path = require('path');
+const fs = require('fs');
 const CopyPlugin = require('copy-webpack-plugin');
 const result = require('dotenv').config();
-// const CleanWebpackPlugin = require('clean-webpack-plugin');
+const shell = require('shelljs');
+const { server, proxy } = require('./config.generator');
+const prefix = require('./proxy.config').prefix;
+
 if (result.error) {
   throw result.error;
 }
@@ -10,7 +14,7 @@ const resolve = filePath => {
   return path.resolve(__dirname, filePath);
 };
 
-const buildDir = resolve('../../nuxt-dist');
+const buildDir = resolve('../../aha-v-dist');
 const rootDir = resolve('../');
 
 const copyPath = [
@@ -18,19 +22,13 @@ const copyPath = [
   'config',
   'nuxt.config.js',
   'pm2.config.js',
-  'node_modules',
+  // 'node_modules',
   ['.env', true],
   'static',
   'package.json'
 ];
 
 const plugins = [
-  // new (require('clean-webpack-plugin'))({
-  //   dry: false,
-  //   cleanOnceBeforeBuildPatterns: [`${buildDir}/build`],
-  //   // exclude: ['files', 'to', 'ignore'],
-  //   dangerouslyAllowCleanPatternsOutsideProject: true
-  // })
   new CopyPlugin(
     copyPath.map(res => {
       const IS_ROOT = false;
@@ -55,26 +53,35 @@ const CONFIG = {
   api: process.env.API_DOMAIN,
   port: process.env.PORT
 };
-
-console.log(CONFIG, 'CONFIG');
+// 文件中的环境变量
+const Env = {
+  WX_DOMAIN: process.env.WX_DOMAIN,
+  SECRET_KEY: process.env.SECRET_KEY
+};
 
 module.exports = {
+  env: Env,
   buildDir: `${buildDir}/build`,
-  axios: {
-    baseURL: `http://${CONFIG.host}:${CONFIG.port}`
-  },
-  proxy: {
-    '/proxy': {
-      target: CONFIG.api, // 测试
-      secure: false,
-      pathRewrite: { '^/proxy/': '/' }
-    }
-  },
-  server: {
-    port: CONFIG.port,
-    host: CONFIG.host,
-    timing: {
-      total: true
+  proxy: proxy(prefix, CONFIG.api),
+  server: server(CONFIG.host, CONFIG.port),
+  hooks: {
+    build: {
+      // 使用shell 命令要注意安全
+      before(builder) {
+        if (fs.existsSync(buildDir)) {
+          console.log('打包前的任务');
+          console.log('开始清理目录', buildDir);
+          if (shell.exec(`rm -r ${buildDir}/`).code !== 0) {
+            shell.echo('Error: 清理文件失败');
+            shell.exit(1);
+          }
+        } else {
+          console.log('路径不存在,不需要清理');
+        }
+      },
+      done(nuxt) {
+        shell.cp('-R', './node_modules', `${buildDir}/`);
+      }
     }
   },
   build: {
@@ -86,6 +93,18 @@ module.exports = {
           warnings: false,
           drop_console: true,
           drop_debugger: true
+        }
+      }
+    },
+    postcss: {
+      plugins: {
+        'postcss-plugin-px2rem': {
+          rootValue: 144,
+          // unitPrecision: 5, // 允许REM单位增长到的十进制数字。
+          exclude: /(node_module)/,
+          selectorBlackList: [/^\.el-/],
+          mediaQuery: false,
+          minPixelValue: 3 // 设置要替换的最小像素值(3px会被转rem)。 默认 0
         }
       }
     },

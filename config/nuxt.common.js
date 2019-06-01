@@ -1,6 +1,6 @@
 const path = require('path');
 const pkg = require('../package');
-
+const prefix = require('./proxy.config').prefix;
 const resolve = filePath => {
   return path.resolve(__dirname, filePath);
 };
@@ -36,7 +36,8 @@ module.exports = {
   ],
   axios: {
     proxy: true,
-    credentials: false
+    withCredentials: false,
+    prefix
   },
   serverMiddleware: ['~server/routes'],
   styleResources: {

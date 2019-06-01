@@ -1,11 +1,12 @@
-const { proxy, server } = require('./proxy.config');
+const { server, proxy } = require('./config.generator');
+const { env, host, port, proxyTarget, prefix } = require('./proxy.config');
 
 module.exports = {
-  proxy,
-  server,
+  proxy: proxy(prefix, proxyTarget),
+  server: server(host, port),
+  env,
   axios: {
-    baseURL: `http://${server.host}:${server.port}`,
-    debug: true
+    // debug: true
   },
   build: {
     devtools: true,

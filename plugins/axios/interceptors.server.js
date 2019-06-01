@@ -1,8 +1,9 @@
 import Apis from './api.inject';
-
+import noProxy from './self';
 export default function(ctx) {
   const { $axios } = ctx;
   $axios.onRequest(config => {
+    noProxy(config);
     return config;
   });
   $axios.onResponse(response => {

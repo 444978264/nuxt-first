@@ -46,7 +46,7 @@ export default {
     }
   },
   async asyncData(app) {
-    let { data } = await app.$axios.get('/api/users');
+    let { data } = await app.$http.get('/api/users', {}, { proxy: false });
     return { users: data };
   }
 };

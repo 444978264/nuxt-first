@@ -1,6 +1,6 @@
 import { Message } from 'element-ui';
 import ApiGenerator from './api.inject';
-
+import noProxy from './self';
 export default function(ctx, inject) {
   const { store, $axios } = ctx;
   // 跟踪参数暂不处理
@@ -15,6 +15,7 @@ export default function(ctx, inject) {
   }
   $axios.setToken(basic_auth, 'Basic');
   $axios.onRequest(config => {
+    noProxy(config);
     return config;
   });
   $axios.onResponse(response => {
